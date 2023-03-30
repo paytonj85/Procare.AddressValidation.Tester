@@ -37,14 +37,14 @@ namespace Procare.AddressValidation.Tester
             GC.SuppressFinalize(this);
         }
 
-        protected HttpClient CreateClient()
+        protected HttpClient GetClient()
         {
             if (this.httpClientFactory == null)
             {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
-            return this.httpClientFactory.CreateClient(this.httpMessageHandler, this.disposeHandler);
+            return this.httpClientFactory.GetClient(this.httpMessageHandler, this.disposeHandler);
         }
 
         protected virtual void Dispose(bool disposing)

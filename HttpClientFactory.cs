@@ -9,7 +9,7 @@ namespace Procare.AddressValidation.Tester
     using System.Collections.Generic;
     using System.Net.Http;
 
-    public class HttpClientFactory : IHttpClientFactory
+    public sealed class HttpClientFactory : IHttpClientFactory
     {
         private HttpClient? defaultClient;
         private IDictionary<HttpMessageHandler, HttpClient>? specificClients = new Dictionary<HttpMessageHandler, HttpClient>();
@@ -19,12 +19,12 @@ namespace Procare.AddressValidation.Tester
             this.Dispose(false);
         }
 
-        public HttpClient CreateClient()
+        public HttpClient GetClient()
         {
-            return this.CreateClient(default, default);
+            return this.GetClient(default, default);
         }
 
-        public HttpClient CreateClient(HttpMessageHandler? handler, bool disposeHandler)
+        public HttpClient GetClient(HttpMessageHandler? handler, bool disposeHandler)
         {
             if (this.specificClients == null)
             {
@@ -52,7 +52,7 @@ namespace Procare.AddressValidation.Tester
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -62,7 +62,7 @@ namespace Procare.AddressValidation.Tester
                 {
                     foreach (var client in this.specificClients.Values)
                     {
-                        client?.Dispose();
+                        client.Dispose();
                     }
                 }
             }

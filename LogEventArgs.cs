@@ -1,17 +1,19 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IHttpClientFactory.cs" company="Procare Software, LLC">
+// <copyright file="LogEventArgs.cs" company="Procare Software, LLC">
 //     Copyright © 2021-2023 Procare Software, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Procare.AddressValidation.Tester
 {
     using System;
-    using System.Net.Http;
 
-    public interface IHttpClientFactory : IDisposable
+    public class LogEventArgs : EventArgs
     {
-        HttpClient GetClient();
+        public LogEventArgs(string message)
+        {
+            this.Message = message;
+        }
 
-        HttpClient GetClient(HttpMessageHandler? handler, bool disposeHandler);
+        public string Message { get; }
     }
 }

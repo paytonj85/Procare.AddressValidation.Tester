@@ -45,7 +45,7 @@ namespace Procare.AddressValidation.Tester
 
             foreach (var prop in this.GetType().GetProperties())
             {
-                var value = (string?)prop.GetMethod!.Invoke(this, Array.Empty<object>());
+                var value = (string?)prop.GetValue(this);
                 if (!string.IsNullOrEmpty(value))
                 {
                     result.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}={2}", result.Length == 0 ? "?" : "&", WebUtility.UrlEncode(prop.Name), WebUtility.UrlEncode(value));
