@@ -17,7 +17,7 @@ namespace Procare.AddressValidation.Tester
     [SuppressMessage(
         "Globalization",
         "CA1303:Do not pass literals as localized parameters",
-        Justification = "Any string literal in this class is just going to be console output")]
+        Justification = "any string literals are just test console output. Not worth a resource table")]
     internal static class Program
     {
         private static async Task Main()
@@ -44,7 +44,8 @@ namespace Procare.AddressValidation.Tester
                     Console.WriteLine(ex.Message);
                 }
 
-                Console.Write(" Q to quit, any other key to resend request.");
+                const string x = " Q to quit, any other key to resend request.";
+                Console.Write(x);
                 if (Console.ReadKey().Key == ConsoleKey.Q)
                 {
                     return;
